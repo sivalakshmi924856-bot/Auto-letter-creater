@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Letter Creator</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+
+body{
+background:linear-gradient(135deg,#6a11cb,#2575fc);
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+}
+
+.container{
+width:100%;
+max-width:800px;
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(20px);
+border-radius:20px;
+padding:25px;
+color:white;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+margin-top:5px;
+outline:none;
+}
+
+textarea{
+height:100px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:20px;
+border:none;
+border-radius:10px;
+font-size:17px;
+cursor:pointer;
+background:#00e5ff;
+color:#000;
+font-weight:bold;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.03);
+}
+
+.output{
+margin-top:20px;
+background:white;
+color:black;
+padding:20px;
+border-radius:12px;
+white-space:pre-wrap;
+}
+
+@media(max-width:700px){
+.grid{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📄 Auto Letter Creator</h1>
+
+<div class="grid">
+
+<div>
+<label>Your Name</label>
+<input id="sender" placeholder="Your Name">
+</div>
+
+<div>
+<label>Receiver Name</label>
+<input id="receiver" placeholder="Receiver">
+</div>
+
+<div>
+<label>Date</label>
+<input type="date" id="date">
+</div>
+
+<div>
+<label>Letter Type</label>
+<select id="type">
+<option>Leave Letter</option>
+<option>Job Application</option>
+<option>Complaint Letter</option>
+<option>Permission Letter</option>
+<option>Thank You Letter</option>
+</select>
+</div>
+
+</div>
+
+<br>
+
+<label>Reason / Subject</label>
+<textarea id="reason"></textarea>
+
+<button onclick="generateLetter()">Generate Letter</button>
+
+<div class="output" id="output">
+Your letter will appear here...
+</div>
+
+</div>
+
+<script>
+
+function generateLetter(){
+
+let sender=document.getElementById("sender").value;
+let receiver=document.getElementById("receiver").value;
+let date=document.getElementById("date").value;
+let type=document.getElementById("type").value;
+let reason=document.getElementById("reason").value;
+
+let body="";
+
+switch(type){
+
+case "Leave Letter":
+body=`Dear ${receiver},
+
+I respectfully request leave due to ${reason}. Kindly grant me leave for the required period.
+
+Thank you for your understanding.
+
+Sincerely,
+${sender}`;
+break;
+
+case "Job Application":
+body=`Dear ${receiver},
+
+I am writing to apply for the advertised position. I believe my skills and dedication make me a suitable candidate.
+
+${reason}
+
+Thank you for considering my application.
+
+Sincerely,
+${sender}`;
+break;
+
+case "Complaint Letter":
+body=`Dear ${receiver},
+
+I would like to bring to your attention the following issue:
+
+${reason}
+
+I kindly request that this matter be resolved as soon as possible.
+
+Regards,
+${sender}`;
+break;
+
+case "Permission Letter":
+body=`Dear ${receiver},
+
+I kindly request permission for the following purpose:
+
+${reason}
+
+I hope you will approve my request.
+
+Thank you.
+
+Sincerely,
+${sender}`;
+break;
+
+case "Thank You Letter":
+body=`Dear ${receiver},
+
+I sincerely thank you for:
+
+${reason}
+
+Your support means a lot to me.
+
+Warm Regards,
+${sender}`;
+break;
+
+}
+
+document.getElementById("output").innerHTML=
+`Date: ${date}
+
+${body}`;
+
+}
+
+</script>
+
+</body>
+</html>
